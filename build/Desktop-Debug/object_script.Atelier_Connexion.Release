@@ -1,0 +1,12 @@
+release/chatbotwindow.o
+release/mailwindow.o
+release/mailwindow.o
+release/main.o
+release/mainwindow.o
+release/mainwindow.o
+release/mainwindow.o
+release/connection.o
+release/fournisseur.o
+release/moc_chatbotwindow.o
+release/moc_mailwindow.o
+release/moc_mainwindow.o

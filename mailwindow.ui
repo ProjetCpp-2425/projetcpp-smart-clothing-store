@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MailWindow</class>
+ <widget class="QWidget" name="MailWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>730</width>
+    <height>510</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLineEdit" name="attachmentLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>136</y>
+     <width>571</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>attachement</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="sendMailButton">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>466</y>
+     <width>651</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(13, 33, 79); color: white;</string>
+   </property>
+   <property name="text">
+    <string>Envoyer</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="messageTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>172</y>
+     <width>651</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>tapez votre message ...</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="browseBtn">
+   <property name="geometry">
+    <rect>
+     <x>607</x>
+     <y>135</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(13, 33, 79); color: white;</string>
+   </property>
+   <property name="text">
+    <string>Browse ...</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="recipientLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>66</y>
+     <width>651</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Destinataire</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="subjectLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>100</y>
+     <width>651</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Sujet</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(13, 33, 79);color: white;
+border-radius: 15px; </string>
+   </property>
+   <property name="text">
+    <string>Mail :</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

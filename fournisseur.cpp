@@ -1,0 +1,64 @@
+#include "fournisseur.h"
+#include "connection.h"
+#include <QSqlError>
+#include <QDebug>
+
+Fournisseur::Fournisseur() {}
+
+bool Fournisseur::addFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate) {
+    QSqlQuery query;
+    query.prepare("INSERT INTO fournisseurs (id, name, telephone, email, achat_date) VALUES (?, ?, ?, ?, ?)");
+    query.addBindValue(id);
+    query.addBindValue(name);
+    query.addBindValue(telephone);
+    query.addBindValue(email);
+    query.addBindValue(achatDate);
+
+    if (!query.exec()) {
+        qDebug() << "Error adding fournisseur:" << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Fournisseur::updateFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate) {
+    QSqlQuery query;
+    query.prepare("UPDATE fournisseurs SET name = ?, telephone = ?, email = ?, achat_date = ? WHERE id = ?");
+    query.addBindValue(name);
+    query.addBindValue(telephone);
+    query.addBindValue(email);
+    query.addBindValue(achatDate);
+    query.addBindValue(id);
+
+    if (!query.exec()) {
+        qDebug() << "Error updating fournisseur:" << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Fournisseur::deleteFournisseur(int id) {
+    QSqlQuery query;
+    query.prepare("DELETE FROM fournisseurs WHERE id = ?");
+    query.addBindValue(id);
+
+    if (!query.exec()) {
+        qDebug() << "Error deleting fournisseur:" << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+QSqlQueryModel* Fournisseur::getFournisseurs() {
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QSqlQuery query("SELECT * FROM fournisseurs");
+
+    if (!query.exec()) {
+        qDebug() << "Error retrieving fournisseurs:" << query.lastError().text();
+        delete model;
+        return nullptr;
+    }
+
+    model->setQuery(query);
+    return model;
+}
