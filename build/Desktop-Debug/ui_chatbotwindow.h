@@ -82,7 +82,7 @@ public:
         label->setText(QString());
         label_2->setText(QCoreApplication::translate("ChatBotWindow", "Entr\303\251e :", nullptr));
         sendButton->setText(QCoreApplication::translate("ChatBotWindow", "Envoyer", nullptr));
-        label_3->setText(QCoreApplication::translate("ChatBotWindow", "Chat Bot :", nullptr));
+        label_3->setText(QCoreApplication::translate("ChatBotWindow", " Chat Bot :", nullptr));
         label_4->setText(QCoreApplication::translate("ChatBotWindow", "Sortie :", nullptr));
     } // retranslateUi
 

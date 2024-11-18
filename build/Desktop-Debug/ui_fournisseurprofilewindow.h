@@ -96,7 +96,7 @@ public:
         emailLabel->setText(QString());
         telephoneLabel->setText(QString());
         label_5->setText(QCoreApplication::translate("FournisseurProfileWindow", "Date achat :", nullptr));
-        label_2->setText(QCoreApplication::translate("FournisseurProfileWindow", "Profile :", nullptr));
+        label_2->setText(QCoreApplication::translate("FournisseurProfileWindow", " Profile :", nullptr));
         achatDateLabel->setText(QString());
         label_4->setText(QCoreApplication::translate("FournisseurProfileWindow", "Email :", nullptr));
         label_6->setText(QCoreApplication::translate("FournisseurProfileWindow", "Nom :", nullptr));

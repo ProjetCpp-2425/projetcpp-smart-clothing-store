@@ -86,7 +86,7 @@ public:
         label->setText(QString());
         sendMailButton->setText(QCoreApplication::translate("MailWindow", "Envoyer", nullptr));
         subjectLineEdit->setPlaceholderText(QCoreApplication::translate("MailWindow", "Sujet", nullptr));
-        label_2->setText(QCoreApplication::translate("MailWindow", "Mail :", nullptr));
+        label_2->setText(QCoreApplication::translate("MailWindow", " Mail :", nullptr));
         browseBtn->setText(QCoreApplication::translate("MailWindow", "Browse ...", nullptr));
         recipientLineEdit->setPlaceholderText(QCoreApplication::translate("MailWindow", "Destinataire", nullptr));
         messageTextEdit->setPlaceholderText(QCoreApplication::translate("MailWindow", "tapez votre message ...", nullptr));

@@ -113,7 +113,10 @@ public:
         fournisseurTableWidget = new QTableWidget(centralwidget);
         if (fournisseurTableWidget->columnCount() < 5)
             fournisseurTableWidget->setColumnCount(5);
+        QFont font;
+        font.setKerning(true);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        __qtablewidgetitem->setFont(font);
         fournisseurTableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         fournisseurTableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
@@ -157,20 +160,20 @@ public:
         fournisseurTableWidget->setVerticalHeaderItem(14, __qtablewidgetitem19);
         QTableWidgetItem *__qtablewidgetitem20 = new QTableWidgetItem();
         fournisseurTableWidget->setVerticalHeaderItem(15, __qtablewidgetitem20);
-        QFont font;
-        font.setPointSize(8);
-        font.setBold(false);
+        QFont font1;
+        font1.setPointSize(8);
+        font1.setBold(false);
         QTableWidgetItem *__qtablewidgetitem21 = new QTableWidgetItem();
-        __qtablewidgetitem21->setFont(font);
+        __qtablewidgetitem21->setFont(font1);
         fournisseurTableWidget->setItem(0, 1, __qtablewidgetitem21);
         fournisseurTableWidget->setObjectName(QString::fromUtf8("fournisseurTableWidget"));
         fournisseurTableWidget->setGeometry(QRect(480, 150, 421, 361));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Arial"));
-        font1.setPointSize(10);
-        font1.setBold(true);
-        font1.setItalic(false);
-        fournisseurTableWidget->setFont(font1);
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Arial"));
+        font2.setPointSize(10);
+        font2.setBold(true);
+        font2.setItalic(false);
+        fournisseurTableWidget->setFont(font2);
         fournisseurTableWidget->setStyleSheet(QString::fromUtf8("QHeaderView::section {\n"
 " background: rgb(228,224,223);\n"
 " color: black;\n"
@@ -228,25 +231,25 @@ public:
         palette1.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush6);
 #endif
         exportPdfButton->setPalette(palette1);
-        QFont font2;
-        font2.setPointSize(9);
-        font2.setBold(true);
-        exportPdfButton->setFont(font2);
+        QFont font3;
+        font3.setPointSize(9);
+        font3.setBold(true);
+        exportPdfButton->setFont(font3);
         exportPdfButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         searchButton = new QPushButton(centralwidget);
         searchButton->setObjectName(QString::fromUtf8("searchButton"));
         searchButton->setGeometry(QRect(360, 210, 91, 31));
-        searchButton->setFont(font2);
+        searchButton->setFont(font3);
         searchButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         addButton = new QPushButton(centralwidget);
         addButton->setObjectName(QString::fromUtf8("addButton"));
         addButton->setGeometry(QRect(170, 510, 81, 31));
-        addButton->setFont(font2);
+        addButton->setFont(font3);
         addButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         updateButton = new QPushButton(centralwidget);
         updateButton->setObjectName(QString::fromUtf8("updateButton"));
         updateButton->setGeometry(QRect(790, 520, 91, 31));
-        updateButton->setFont(font2);
+        updateButton->setFont(font3);
         updateButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         searchLineEdit = new QLineEdit(centralwidget);
         searchLineEdit->setObjectName(QString::fromUtf8("searchLineEdit"));
@@ -254,7 +257,7 @@ public:
         refreshButton = new QPushButton(centralwidget);
         refreshButton->setObjectName(QString::fromUtf8("refreshButton"));
         refreshButton->setGeometry(QRect(20, 510, 90, 31));
-        refreshButton->setFont(font2);
+        refreshButton->setFont(font3);
         refreshButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         frame = new QFrame(centralwidget);
         frame->setObjectName(QString::fromUtf8("frame"));
@@ -272,10 +275,10 @@ public:
         palette2.setBrush(QPalette::Disabled, QPalette::Base, brush7);
         palette2.setBrush(QPalette::Disabled, QPalette::Window, brush7);
         frame->setPalette(palette2);
-        QFont font3;
-        font3.setPointSize(10);
-        font3.setBold(true);
-        frame->setFont(font3);
+        QFont font4;
+        font4.setPointSize(10);
+        font4.setBold(true);
+        frame->setFont(font4);
         frame->setStyleSheet(QString::fromUtf8("QFrame {\n"
 "    background-color: rgb(228,224,223); \n"
 "    border-radius: 15px;\n"
@@ -295,14 +298,14 @@ public:
 
         label_11 = new QLabel(frame);
         label_11->setObjectName(QString::fromUtf8("label_11"));
-        label_11->setFont(font3);
+        label_11->setFont(font4);
         label_11->setStyleSheet(QString::fromUtf8("color: black;"));
 
         gridLayout->addWidget(label_11, 2, 0, 1, 1);
 
         label_12 = new QLabel(frame);
         label_12->setObjectName(QString::fromUtf8("label_12"));
-        label_12->setFont(font3);
+        label_12->setFont(font4);
         label_12->setStyleSheet(QString::fromUtf8("color: black;"));
 
         gridLayout->addWidget(label_12, 3, 0, 1, 1);
@@ -314,7 +317,7 @@ public:
 
         label_13 = new QLabel(frame);
         label_13->setObjectName(QString::fromUtf8("label_13"));
-        label_13->setFont(font3);
+        label_13->setFont(font4);
         label_13->setStyleSheet(QString::fromUtf8("color: black;"));
 
         gridLayout->addWidget(label_13, 4, 0, 1, 1);
@@ -331,7 +334,7 @@ public:
 
         label_9 = new QLabel(frame);
         label_9->setObjectName(QString::fromUtf8("label_9"));
-        label_9->setFont(font3);
+        label_9->setFont(font4);
         label_9->setStyleSheet(QString::fromUtf8("color: black;"));
 
         gridLayout->addWidget(label_9, 0, 0, 1, 1);
@@ -344,28 +347,28 @@ public:
         label_15 = new QLabel(centralwidget);
         label_15->setObjectName(QString::fromUtf8("label_15"));
         label_15->setGeometry(QRect(20, 120, 211, 31));
-        QFont font4;
-        font4.setPointSize(12);
-        font4.setBold(true);
-        label_15->setFont(font4);
+        QFont font5;
+        font5.setPointSize(12);
+        font5.setBold(true);
+        label_15->setFont(font5);
         label_15->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); border-radius: 15px; \n"
 "color: white;"));
         deleteButton = new QPushButton(centralwidget);
         deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
         deleteButton->setGeometry(QRect(670, 520, 91, 31));
-        deleteButton->setFont(font2);
+        deleteButton->setFont(font3);
         deleteButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         sortButton = new QPushButton(centralwidget);
         sortButton->setObjectName(QString::fromUtf8("sortButton"));
         sortButton->setGeometry(QRect(280, 300, 101, 31));
-        QFont font5;
-        font5.setBold(true);
-        sortButton->setFont(font5);
+        QFont font6;
+        font6.setBold(true);
+        sortButton->setFont(font6);
         sortButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         label_16 = new QLabel(centralwidget);
         label_16->setObjectName(QString::fromUtf8("label_16"));
         label_16->setGeometry(QRect(480, 90, 241, 31));
-        label_16->setFont(font4);
+        label_16->setFont(font5);
         label_16->setStyleSheet(QString::fromUtf8(" background-color: rgb(5, 16, 66); \n"
 "border-radius: 15px; \n"
 "color: white;"));
@@ -440,31 +443,31 @@ public:
         palette4.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush10);
 #endif
         label_14->setPalette(palette4);
-        QFont font6;
-        font6.setPointSize(16);
-        font6.setBold(true);
-        label_14->setFont(font6);
+        QFont font7;
+        font7.setPointSize(16);
+        font7.setBold(true);
+        label_14->setFont(font7);
         label_14->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79);color: white;\n"
 "border-radius: 15px; "));
         mailButton = new QPushButton(centralwidget);
         mailButton->setObjectName(QString::fromUtf8("mailButton"));
         mailButton->setGeometry(QRect(20, 70, 101, 31));
-        mailButton->setFont(font2);
+        mailButton->setFont(font3);
         mailButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         chatBotButton = new QPushButton(centralwidget);
         chatBotButton->setObjectName(QString::fromUtf8("chatBotButton"));
         chatBotButton->setGeometry(QRect(150, 70, 101, 31));
-        chatBotButton->setFont(font5);
+        chatBotButton->setFont(font6);
         chatBotButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         profileButton = new QPushButton(centralwidget);
         profileButton->setObjectName(QString::fromUtf8("profileButton"));
         profileButton->setGeometry(QRect(480, 520, 91, 31));
-        profileButton->setFont(font2);
+        profileButton->setFont(font3);
         profileButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         convertButton = new QPushButton(centralwidget);
         convertButton->setObjectName(QString::fromUtf8("convertButton"));
         convertButton->setGeometry(QRect(280, 70, 101, 31));
-        convertButton->setFont(font5);
+        convertButton->setFont(font6);
         convertButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -509,12 +512,12 @@ public:
         label_12->setText(QCoreApplication::translate("MainWindow", "Telephone", nullptr));
         label_13->setText(QCoreApplication::translate("MainWindow", "Email", nullptr));
         label_9->setText(QCoreApplication::translate("MainWindow", "Nom", nullptr));
-        label_15->setText(QCoreApplication::translate("MainWindow", "Ajouter Fournisseur :", nullptr));
+        label_15->setText(QCoreApplication::translate("MainWindow", " Ajouter Fournisseur :", nullptr));
         deleteButton->setText(QCoreApplication::translate("MainWindow", "Supprimer", nullptr));
         sortButton->setText(QCoreApplication::translate("MainWindow", "Tri par", nullptr));
-        label_16->setText(QCoreApplication::translate("MainWindow", "Liste des Fournisseurs :", nullptr));
+        label_16->setText(QCoreApplication::translate("MainWindow", " Liste des Fournisseurs :", nullptr));
         sortByIdRadioButton->setText(QCoreApplication::translate("MainWindow", "ID", nullptr));
-        label_14->setText(QCoreApplication::translate("MainWindow", "Gestion des Fournisseurs", nullptr));
+        label_14->setText(QCoreApplication::translate("MainWindow", " Gestion des Fournisseurs :", nullptr));
         mailButton->setText(QCoreApplication::translate("MainWindow", "Envoyer Mail", nullptr));
         chatBotButton->setText(QCoreApplication::translate("MainWindow", "Chat Bot", nullptr));
         profileButton->setText(QCoreApplication::translate("MainWindow", "Profile", nullptr));

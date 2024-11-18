@@ -15,6 +15,7 @@ SOURCES += \
     chatbotwindow.cpp \
     convertisseurwindow.cpp \
     fournisseurprofilewindow.cpp \
+    loginwindow.cpp \
     mailwindow.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     chatbotwindow.h \
     convertisseurwindow.h \
     fournisseurprofilewindow.h \
+    loginwindow.h \
     mailwindow.h \
     mainwindow.h \
     connection.h \
@@ -33,6 +35,7 @@ HEADERS += \
 FORMS += chatbotwindow.ui \
          convertisseurwindow.ui \
          fournisseurprofilewindow.ui \
+         loginwindow.ui \
          mailwindow.ui \
          mainwindow.ui
 

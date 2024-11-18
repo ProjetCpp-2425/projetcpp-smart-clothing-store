@@ -86,7 +86,7 @@
 border-radius: 15px; </string>
    </property>
    <property name="text">
-    <string>Mail :</string>
+    <string> Mail :</string>
    </property>
   </widget>
   <widget class="QPushButton" name="browseBtn">

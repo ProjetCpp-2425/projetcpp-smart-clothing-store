@@ -350,6 +350,11 @@ QTableWidget {
      <property name="text">
       <string>ID</string>
      </property>
+     <property name="font">
+      <font>
+       <kerning>true</kerning>
+      </font>
+     </property>
     </column>
     <column>
      <property name="text">
@@ -941,7 +946,7 @@ QLineEdit {
 color: white;</string>
     </property>
     <property name="text">
-     <string>Ajouter Fournisseur :</string>
+     <string> Ajouter Fournisseur :</string>
     </property>
    </widget>
    <widget class="QPushButton" name="deleteButton">
@@ -1008,7 +1013,7 @@ border-radius: 15px;
 color: white;</string>
     </property>
     <property name="text">
-     <string>Liste des Fournisseurs :</string>
+     <string> Liste des Fournisseurs :</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="sortByIdRadioButton">
@@ -1445,7 +1450,7 @@ color: white;</string>
 border-radius: 15px; </string>
     </property>
     <property name="text">
-     <string>Gestion des Fournisseurs</string>
+     <string> Gestion des Fournisseurs :</string>
     </property>
    </widget>
    <widget class="QPushButton" name="mailButton">

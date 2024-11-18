@@ -108,7 +108,7 @@ public:
         label_2->setText(QCoreApplication::translate("ConvertisseurWindow", "Montant \303\240 convertir :", nullptr));
         label_4->setText(QCoreApplication::translate("ConvertisseurWindow", "Devise cible :", nullptr));
         convertButton->setText(QCoreApplication::translate("ConvertisseurWindow", "Convertir", nullptr));
-        label_5->setText(QCoreApplication::translate("ConvertisseurWindow", "Convertisseur de Devise :", nullptr));
+        label_5->setText(QCoreApplication::translate("ConvertisseurWindow", " Convertisseur de Devise :", nullptr));
         resultLabel->setText(QString());
         targetCurrencyComboBox->setItemText(0, QCoreApplication::translate("ConvertisseurWindow", "TND", nullptr));
         targetCurrencyComboBox->setItemText(1, QCoreApplication::translate("ConvertisseurWindow", "EUR", nullptr));
