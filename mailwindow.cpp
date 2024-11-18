@@ -9,6 +9,7 @@ MailWindow::MailWindow(QWidget *parent) :
     ui(new Ui::MailWindow)
 {
     ui->setupUi(this);
+    connect(ui->browseBtn, &QPushButton::clicked, this, &MailWindow::onAttachmentBrowseButtonClicked);
 
     connect(ui->attachmentLineEdit, &QLineEdit::cursorPositionChanged, [this]() {
         QString filePath = QFileDialog::getOpenFileName(this, "Choisir un fichier", "", "Tous les fichiers (*)");

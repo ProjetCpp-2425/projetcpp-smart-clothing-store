@@ -13,26 +13,26 @@ CONFIG += console
 
 SOURCES += \
     chatbotwindow.cpp \
-    mailwindow.cpp \
+    convertisseurwindow.cpp \
+    fournisseurprofilewindow.cpp \
     mailwindow.cpp \
     main.cpp \
-    mainwindow.cpp \
-    mainwindow.cpp \
     mainwindow.cpp \
     connection.cpp \
     fournisseur.cpp
 
 HEADERS += \
     chatbotwindow.h \
+    convertisseurwindow.h \
+    fournisseurprofilewindow.h \
     mailwindow.h \
-    mailwindow.h \
-    mainwindow.h \
-    mainwindow.h \
     mainwindow.h \
     connection.h \
     fournisseur.h
 
 FORMS += chatbotwindow.ui \
+         convertisseurwindow.ui \
+         fournisseurprofilewindow.ui \
          mailwindow.ui \
          mainwindow.ui
 

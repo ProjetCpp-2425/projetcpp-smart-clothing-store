@@ -42,16 +42,15 @@ public:
     QPushButton *refreshButton;
     QFrame *frame;
     QGridLayout *gridLayout;
-    QLineEdit *nameLineEdit;
-    QLineEdit *emailLineEdit;
-    QLabel *label_10;
+    QLineEdit *idLineEdit;
+    QLabel *label_11;
     QLabel *label_12;
+    QLineEdit *emailLineEdit;
+    QLabel *label_13;
+    QLineEdit *nameLineEdit;
+    QLineEdit *telephoneLineEdit;
     QLabel *label_9;
     QDateEdit *achatDateEdit;
-    QLineEdit *telephoneLineEdit;
-    QLabel *label_13;
-    QLabel *label_11;
-    QLineEdit *idLineEdit;
     QLabel *label_15;
     QPushButton *deleteButton;
     QPushButton *sortButton;
@@ -60,6 +59,8 @@ public:
     QLabel *label_14;
     QPushButton *mailButton;
     QPushButton *chatBotButton;
+    QPushButton *profileButton;
+    QPushButton *convertButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -161,9 +162,9 @@ public:
         font.setBold(false);
         QTableWidgetItem *__qtablewidgetitem21 = new QTableWidgetItem();
         __qtablewidgetitem21->setFont(font);
-        fournisseurTableWidget->setItem(0, 0, __qtablewidgetitem21);
+        fournisseurTableWidget->setItem(0, 1, __qtablewidgetitem21);
         fournisseurTableWidget->setObjectName(QString::fromUtf8("fournisseurTableWidget"));
-        fournisseurTableWidget->setGeometry(QRect(470, 140, 421, 361));
+        fournisseurTableWidget->setGeometry(QRect(480, 150, 421, 361));
         QFont font1;
         font1.setFamily(QString::fromUtf8("Arial"));
         font1.setPointSize(10);
@@ -244,7 +245,7 @@ public:
         addButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         updateButton = new QPushButton(centralwidget);
         updateButton->setObjectName(QString::fromUtf8("updateButton"));
-        updateButton->setGeometry(QRect(790, 510, 91, 31));
+        updateButton->setGeometry(QRect(790, 520, 91, 31));
         updateButton->setFont(font2);
         updateButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         searchLineEdit = new QLineEdit(centralwidget);
@@ -287,22 +288,17 @@ public:
 ""));
         gridLayout = new QGridLayout(frame);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        nameLineEdit = new QLineEdit(frame);
-        nameLineEdit->setObjectName(QString::fromUtf8("nameLineEdit"));
+        idLineEdit = new QLineEdit(frame);
+        idLineEdit->setObjectName(QString::fromUtf8("idLineEdit"));
 
-        gridLayout->addWidget(nameLineEdit, 0, 1, 1, 2);
+        gridLayout->addWidget(idLineEdit, 1, 2, 1, 1);
 
-        emailLineEdit = new QLineEdit(frame);
-        emailLineEdit->setObjectName(QString::fromUtf8("emailLineEdit"));
+        label_11 = new QLabel(frame);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+        label_11->setFont(font3);
+        label_11->setStyleSheet(QString::fromUtf8("color: black;"));
 
-        gridLayout->addWidget(emailLineEdit, 4, 2, 1, 1);
-
-        label_10 = new QLabel(frame);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
-        label_10->setFont(font3);
-        label_10->setStyleSheet(QString::fromUtf8("color: black;"));
-
-        gridLayout->addWidget(label_10, 1, 0, 1, 1);
+        gridLayout->addWidget(label_11, 2, 0, 1, 1);
 
         label_12 = new QLabel(frame);
         label_12->setObjectName(QString::fromUtf8("label_12"));
@@ -310,6 +306,28 @@ public:
         label_12->setStyleSheet(QString::fromUtf8("color: black;"));
 
         gridLayout->addWidget(label_12, 3, 0, 1, 1);
+
+        emailLineEdit = new QLineEdit(frame);
+        emailLineEdit->setObjectName(QString::fromUtf8("emailLineEdit"));
+
+        gridLayout->addWidget(emailLineEdit, 4, 2, 1, 1);
+
+        label_13 = new QLabel(frame);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+        label_13->setFont(font3);
+        label_13->setStyleSheet(QString::fromUtf8("color: black;"));
+
+        gridLayout->addWidget(label_13, 4, 0, 1, 1);
+
+        nameLineEdit = new QLineEdit(frame);
+        nameLineEdit->setObjectName(QString::fromUtf8("nameLineEdit"));
+
+        gridLayout->addWidget(nameLineEdit, 0, 1, 1, 2);
+
+        telephoneLineEdit = new QLineEdit(frame);
+        telephoneLineEdit->setObjectName(QString::fromUtf8("telephoneLineEdit"));
+
+        gridLayout->addWidget(telephoneLineEdit, 3, 2, 1, 1);
 
         label_9 = new QLabel(frame);
         label_9->setObjectName(QString::fromUtf8("label_9"));
@@ -323,30 +341,6 @@ public:
 
         gridLayout->addWidget(achatDateEdit, 2, 2, 1, 1);
 
-        telephoneLineEdit = new QLineEdit(frame);
-        telephoneLineEdit->setObjectName(QString::fromUtf8("telephoneLineEdit"));
-
-        gridLayout->addWidget(telephoneLineEdit, 3, 2, 1, 1);
-
-        label_13 = new QLabel(frame);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
-        label_13->setFont(font3);
-        label_13->setStyleSheet(QString::fromUtf8("color: black;"));
-
-        gridLayout->addWidget(label_13, 4, 0, 1, 1);
-
-        label_11 = new QLabel(frame);
-        label_11->setObjectName(QString::fromUtf8("label_11"));
-        label_11->setFont(font3);
-        label_11->setStyleSheet(QString::fromUtf8("color: black;"));
-
-        gridLayout->addWidget(label_11, 2, 0, 1, 1);
-
-        idLineEdit = new QLineEdit(frame);
-        idLineEdit->setObjectName(QString::fromUtf8("idLineEdit"));
-
-        gridLayout->addWidget(idLineEdit, 1, 2, 1, 1);
-
         label_15 = new QLabel(centralwidget);
         label_15->setObjectName(QString::fromUtf8("label_15"));
         label_15->setGeometry(QRect(20, 120, 211, 31));
@@ -358,7 +352,7 @@ public:
 "color: white;"));
         deleteButton = new QPushButton(centralwidget);
         deleteButton->setObjectName(QString::fromUtf8("deleteButton"));
-        deleteButton->setGeometry(QRect(670, 510, 91, 31));
+        deleteButton->setGeometry(QRect(670, 520, 91, 31));
         deleteButton->setFont(font2);
         deleteButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         sortButton = new QPushButton(centralwidget);
@@ -459,9 +453,19 @@ public:
         mailButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         chatBotButton = new QPushButton(centralwidget);
         chatBotButton->setObjectName(QString::fromUtf8("chatBotButton"));
-        chatBotButton->setGeometry(QRect(150, 70, 83, 29));
+        chatBotButton->setGeometry(QRect(150, 70, 101, 31));
         chatBotButton->setFont(font5);
         chatBotButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
+        profileButton = new QPushButton(centralwidget);
+        profileButton->setObjectName(QString::fromUtf8("profileButton"));
+        profileButton->setGeometry(QRect(480, 520, 91, 31));
+        profileButton->setFont(font2);
+        profileButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
+        convertButton = new QPushButton(centralwidget);
+        convertButton->setObjectName(QString::fromUtf8("convertButton"));
+        convertButton->setGeometry(QRect(280, 70, 101, 31));
+        convertButton->setFont(font5);
+        convertButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -481,9 +485,9 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         sortByNameRadioButton->setText(QCoreApplication::translate("MainWindow", "Nom", nullptr));
         QTableWidgetItem *___qtablewidgetitem = fournisseurTableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "Nom", nullptr));
+        ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "ID", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = fournisseurTableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QCoreApplication::translate("MainWindow", "ID", nullptr));
+        ___qtablewidgetitem1->setText(QCoreApplication::translate("MainWindow", "Nom", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = fournisseurTableWidget->horizontalHeaderItem(2);
         ___qtablewidgetitem2->setText(QCoreApplication::translate("MainWindow", "Date d'achat", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = fournisseurTableWidget->horizontalHeaderItem(3);
@@ -501,11 +505,10 @@ public:
         addButton->setText(QCoreApplication::translate("MainWindow", "Valider", nullptr));
         updateButton->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
         refreshButton->setText(QCoreApplication::translate("MainWindow", "Quitter", nullptr));
-        label_10->setText(QCoreApplication::translate("MainWindow", "ID", nullptr));
-        label_12->setText(QCoreApplication::translate("MainWindow", "Telephone", nullptr));
-        label_9->setText(QCoreApplication::translate("MainWindow", "Nom", nullptr));
-        label_13->setText(QCoreApplication::translate("MainWindow", "Email", nullptr));
         label_11->setText(QCoreApplication::translate("MainWindow", "Date d'achat", nullptr));
+        label_12->setText(QCoreApplication::translate("MainWindow", "Telephone", nullptr));
+        label_13->setText(QCoreApplication::translate("MainWindow", "Email", nullptr));
+        label_9->setText(QCoreApplication::translate("MainWindow", "Nom", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "Ajouter Fournisseur :", nullptr));
         deleteButton->setText(QCoreApplication::translate("MainWindow", "Supprimer", nullptr));
         sortButton->setText(QCoreApplication::translate("MainWindow", "Tri par", nullptr));
@@ -514,6 +517,8 @@ public:
         label_14->setText(QCoreApplication::translate("MainWindow", "Gestion des Fournisseurs", nullptr));
         mailButton->setText(QCoreApplication::translate("MainWindow", "Envoyer Mail", nullptr));
         chatBotButton->setText(QCoreApplication::translate("MainWindow", "Chat Bot", nullptr));
+        profileButton->setText(QCoreApplication::translate("MainWindow", "Profile", nullptr));
+        convertButton->setText(QCoreApplication::translate("MainWindow", "Convertir", nullptr));
     } // retranslateUi
 
 };

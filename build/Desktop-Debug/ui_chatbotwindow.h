@@ -21,47 +21,55 @@ QT_BEGIN_NAMESPACE
 class Ui_ChatBotWindow
 {
 public:
-    QLineEdit *userInputLineEdit;
     QLabel *label;
-    QPushButton *sendButton;
-    QLabel *label_2;
-    QLabel *label_3;
+    QLineEdit *userInputLineEdit;
     QLineEdit *chatbotOutputLineEdit;
+    QLabel *label_2;
+    QPushButton *sendButton;
+    QLabel *label_3;
+    QLabel *label_4;
 
     void setupUi(QWidget *ChatBotWindow)
     {
         if (ChatBotWindow->objectName().isEmpty())
             ChatBotWindow->setObjectName(QString::fromUtf8("ChatBotWindow"));
         ChatBotWindow->resize(432, 397);
+        ChatBotWindow->setStyleSheet(QString::fromUtf8("background-color: white;"));
+        label = new QLabel(ChatBotWindow);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(0, 0, 431, 401));
+        label->setStyleSheet(QString::fromUtf8("background-color: white;"));
         userInputLineEdit = new QLineEdit(ChatBotWindow);
         userInputLineEdit->setObjectName(QString::fromUtf8("userInputLineEdit"));
         userInputLineEdit->setGeometry(QRect(20, 100, 261, 51));
-        label = new QLabel(ChatBotWindow);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(20, 20, 141, 41));
-        QFont font;
-        font.setPointSize(16);
-        font.setBold(true);
-        label->setFont(font);
-        label->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79);color: white;\n"
-"border-radius: 15px; "));
-        sendButton = new QPushButton(ChatBotWindow);
-        sendButton->setObjectName(QString::fromUtf8("sendButton"));
-        sendButton->setGeometry(QRect(310, 110, 83, 31));
-        QFont font1;
-        font1.setBold(true);
-        sendButton->setFont(font1);
-        sendButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
-        label_2 = new QLabel(ChatBotWindow);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(20, 70, 63, 20));
-        label_3 = new QLabel(ChatBotWindow);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(20, 160, 63, 20));
         chatbotOutputLineEdit = new QLineEdit(ChatBotWindow);
         chatbotOutputLineEdit->setObjectName(QString::fromUtf8("chatbotOutputLineEdit"));
         chatbotOutputLineEdit->setGeometry(QRect(20, 190, 391, 181));
         chatbotOutputLineEdit->setReadOnly(true);
+        label_2 = new QLabel(ChatBotWindow);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(20, 70, 63, 20));
+        label_2->setStyleSheet(QString::fromUtf8("color: black;"));
+        sendButton = new QPushButton(ChatBotWindow);
+        sendButton->setObjectName(QString::fromUtf8("sendButton"));
+        sendButton->setGeometry(QRect(310, 110, 83, 31));
+        QFont font;
+        font.setBold(true);
+        sendButton->setFont(font);
+        sendButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
+        label_3 = new QLabel(ChatBotWindow);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(20, 20, 141, 41));
+        QFont font1;
+        font1.setPointSize(16);
+        font1.setBold(true);
+        label_3->setFont(font1);
+        label_3->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79);color: white;\n"
+"border-radius: 15px; "));
+        label_4 = new QLabel(ChatBotWindow);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(20, 160, 63, 20));
+        label_4->setStyleSheet(QString::fromUtf8("color: black;"));
 
         retranslateUi(ChatBotWindow);
 
@@ -71,10 +79,11 @@ public:
     void retranslateUi(QWidget *ChatBotWindow)
     {
         ChatBotWindow->setWindowTitle(QCoreApplication::translate("ChatBotWindow", "Form", nullptr));
-        label->setText(QCoreApplication::translate("ChatBotWindow", "Chat Bot :", nullptr));
-        sendButton->setText(QCoreApplication::translate("ChatBotWindow", "Envoyer", nullptr));
+        label->setText(QString());
         label_2->setText(QCoreApplication::translate("ChatBotWindow", "Entr\303\251e :", nullptr));
-        label_3->setText(QCoreApplication::translate("ChatBotWindow", "Sortie :", nullptr));
+        sendButton->setText(QCoreApplication::translate("ChatBotWindow", "Envoyer", nullptr));
+        label_3->setText(QCoreApplication::translate("ChatBotWindow", "Chat Bot :", nullptr));
+        label_4->setText(QCoreApplication::translate("ChatBotWindow", "Sortie :", nullptr));
     } // retranslateUi
 
 };

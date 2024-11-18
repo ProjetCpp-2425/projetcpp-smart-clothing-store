@@ -15,7 +15,7 @@ Connection::~Connection() {
 
 bool Connection::createConnect() {
     db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName("Source_Projet2A");
+    db.setDatabaseName("Fournisseur");
     db.setUserName("myuser");
     db.setPassword("12345");
 

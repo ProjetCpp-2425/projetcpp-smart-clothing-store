@@ -2,6 +2,7 @@
 #include "connection.h"
 #include <QSqlError>
 #include <QDebug>
+#include <iostream>
 
 Fournisseur::Fournisseur() {}
 
@@ -16,6 +17,12 @@ bool Fournisseur::addFournisseur(int id, const QString &name, const QString &tel
 
     if (!query.exec()) {
         qDebug() << "Error adding fournisseur:" << query.lastError().text();
+        qDebug() << "Executed query:" << query.executedQuery();
+        qDebug() << "ID:" << id;
+        qDebug() << "Name:" << name;
+        qDebug() << "Telephone:" << telephone;
+        qDebug() << "Email:" << email;
+        qDebug() << "Achat Date:" << achatDate.toString("yyyy-MM-dd");
         return false;
     }
     return true;
@@ -51,7 +58,8 @@ bool Fournisseur::deleteFournisseur(int id) {
 
 QSqlQueryModel* Fournisseur::getFournisseurs() {
     QSqlQueryModel *model = new QSqlQueryModel();
-    QSqlQuery query("SELECT * FROM fournisseurs");
+    QSqlQuery query;
+    query.prepare("SELECT * FROM fournisseurs");
 
     if (!query.exec()) {
         qDebug() << "Error retrieving fournisseurs:" << query.lastError().text();

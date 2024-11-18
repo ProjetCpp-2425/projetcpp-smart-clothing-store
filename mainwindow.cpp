@@ -6,12 +6,16 @@
 #include <QPdfWriter>
 #include <QSqlQueryModel>
 #include <QFileDialog>
-#include "./ui_mainwindow.h"
+#include "ui_mainwindow.h"
 #include "fournisseur.h"
 #include "mailwindow.h"
 #include "qsqlerror.h"
 #include "chatbotwindow.h"
 #include "ui_mailwindow.h"
+#include "FournisseurProfileWindow.h"
+#include "convertisseurwindow.h"
+
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +26,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->updateButton, &QPushButton::clicked, this, &MainWindow::onUpdateFournisseurClicked);
     connect(ui->deleteButton, &QPushButton::clicked, this, &MainWindow::onDeleteFournisseurClicked);
     connect(ui->refreshButton, &QPushButton::clicked, this, &MainWindow::onDisplayFournisseursClicked);
+    connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::onSearchFournisseurClicked);
+    connect(ui->exportPdfButton, &QPushButton::clicked, this, &MainWindow::onExportPdfButtonClicked);
+    connect(ui->sortButton, &QPushButton::clicked, this, &MainWindow::onSortButtonClicked);
+    connect(ui->chatBotButton, &QPushButton::clicked, this, &MainWindow::onChatBotButtonClicked);
+    connect(ui->mailButton, &QPushButton::clicked, this, &MainWindow::onMailButtonClicked);
+    connect(ui->profileButton, &QPushButton::clicked, this, &MainWindow::onProfileButtonClicked);
+    connect(ui->convertButton, &QPushButton::clicked, this, &MainWindow::onConvertButtonClicked);
     onDisplayFournisseursClicked();
 }
 
@@ -155,7 +166,8 @@ void MainWindow::onExportPdfButtonClicked()
                              "Les données ont été exportées en PDF avec succès !");
 }
 
-void MainWindow::onSearchButtonClicked() {
+void MainWindow::onSearchFournisseurClicked() {
+    qDebug() << "button clicked";
     QString searchQuery = ui->searchLineEdit->text();
 
     if (searchQuery.isEmpty()) {
@@ -235,15 +247,33 @@ void MainWindow::onMailButtonClicked() {
     mailWindow->show();
 }
 
-void MailWindow::onAttachmentBrowseButtonClicked() {
-    QString filePath = QFileDialog::getOpenFileName(this, "Sélectionnez une pièce jointe", "", "Tous les fichiers (*.*)");
-    if (!filePath.isEmpty()) {
-        ui->attachmentLineEdit->setText(filePath);
-    }
-}
-
 void MainWindow::onChatBotButtonClicked() {
     ChatBotWindow *chatBotWindow = new ChatBotWindow(this);
     chatBotWindow->setAttribute(Qt::WA_DeleteOnClose);
     chatBotWindow->show();
+}
+
+void MainWindow::onProfileButtonClicked()
+{
+    QModelIndex selectedIndex = ui->fournisseurTableWidget->currentIndex();
+    if (selectedIndex.isValid()) {
+
+        QString name = ui->fournisseurTableWidget->item(selectedIndex.row(), 1)->text();
+        QString telephone = ui->fournisseurTableWidget->item(selectedIndex.row(), 2)->text();
+        QString email = ui->fournisseurTableWidget->item(selectedIndex.row(), 3)->text();
+        QString achatDate = ui->fournisseurTableWidget->item(selectedIndex.row(), 4)->text();
+
+        FournisseurProfileWindow* profileWindow = new FournisseurProfileWindow();
+        profileWindow->setFournisseurDetails(name, telephone, email, achatDate);
+        profileWindow->setAttribute(Qt::WA_DeleteOnClose);
+        profileWindow->show();
+    } else {
+        QMessageBox::warning(this, "Sélection invalide", "Veuillez sélectionner un fournisseur.");
+    }
+}
+
+void MainWindow::onConvertButtonClicked() {
+    ConvertisseurWindow *convertisseurWindow = new ConvertisseurWindow(this);
+    convertisseurWindow->setAttribute(Qt::WA_DeleteOnClose);
+    convertisseurWindow->show();
 }

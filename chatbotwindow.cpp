@@ -3,6 +3,8 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QSslSocket>
+#include <QDebug>
 
 ChatBotWindow::ChatBotWindow(QWidget *parent) :
     QWidget(parent),
@@ -10,6 +12,7 @@ ChatBotWindow::ChatBotWindow(QWidget *parent) :
     networkManager(new QNetworkAccessManager(this))
 {
     ui->setupUi(this);
+    connect(ui->sendButton, &QPushButton::clicked, this, &ChatBotWindow::onSendButtonClicked);
     connect(networkManager, &QNetworkAccessManager::finished, this, &ChatBotWindow::handleApiResponse);
 }
 
@@ -26,6 +29,11 @@ void ChatBotWindow::onSendButtonClicked() {
         ui->chatbotOutputLineEdit->setText("Veuillez entrer un message.");
         return;
     }
+
+    qDebug() << "Supports SSL:" << QSslSocket::supportsSsl();
+    qDebug() << "SSL Library Version:" << QSslSocket::sslLibraryVersionString();
+    qDebug() << "SSL Library Build Version:" << QSslSocket::sslLibraryBuildVersionString();
+
 
     QUrl apiUrl("https://api.openai.com/v1/completions");
     QNetworkRequest request(apiUrl);
@@ -51,7 +59,6 @@ void ChatBotWindow::handleApiResponse(QNetworkReply *reply) {
         return;
     }
 
-    // Parse the API response
     QByteArray responseData = reply->readAll();
     QJsonDocument jsonResponse = QJsonDocument::fromJson(responseData);
     QJsonObject jsonObject = jsonResponse.object();

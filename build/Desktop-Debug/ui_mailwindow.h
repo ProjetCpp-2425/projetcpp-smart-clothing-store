@@ -22,52 +22,58 @@ QT_BEGIN_NAMESPACE
 class Ui_MailWindow
 {
 public:
-    QLineEdit *attachmentLineEdit;
+    QLabel *label;
     QPushButton *sendMailButton;
-    QTextEdit *messageTextEdit;
+    QLineEdit *subjectLineEdit;
+    QLabel *label_2;
     QPushButton *browseBtn;
     QLineEdit *recipientLineEdit;
-    QLineEdit *subjectLineEdit;
-    QLabel *label;
+    QTextEdit *messageTextEdit;
+    QLineEdit *attachmentLineEdit;
 
     void setupUi(QWidget *MailWindow)
     {
         if (MailWindow->objectName().isEmpty())
             MailWindow->setObjectName(QString::fromUtf8("MailWindow"));
         MailWindow->resize(730, 510);
-        attachmentLineEdit = new QLineEdit(MailWindow);
-        attachmentLineEdit->setObjectName(QString::fromUtf8("attachmentLineEdit"));
-        attachmentLineEdit->setGeometry(QRect(30, 136, 571, 31));
+        MailWindow->setStyleSheet(QString::fromUtf8("background-color: white;"));
+        label = new QLabel(MailWindow);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(2, -1, 731, 511));
+        label->setStyleSheet(QString::fromUtf8("background-color: white;"));
         sendMailButton = new QPushButton(MailWindow);
         sendMailButton->setObjectName(QString::fromUtf8("sendMailButton"));
-        sendMailButton->setGeometry(QRect(30, 466, 651, 31));
+        sendMailButton->setGeometry(QRect(20, 470, 651, 31));
         QFont font;
         font.setBold(true);
         sendMailButton->setFont(font);
         sendMailButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
-        messageTextEdit = new QTextEdit(MailWindow);
-        messageTextEdit->setObjectName(QString::fromUtf8("messageTextEdit"));
-        messageTextEdit->setGeometry(QRect(30, 172, 651, 291));
+        subjectLineEdit = new QLineEdit(MailWindow);
+        subjectLineEdit->setObjectName(QString::fromUtf8("subjectLineEdit"));
+        subjectLineEdit->setGeometry(QRect(20, 104, 651, 31));
+        label_2 = new QLabel(MailWindow);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(20, 14, 91, 41));
+        QFont font1;
+        font1.setPointSize(16);
+        font1.setBold(true);
+        label_2->setFont(font1);
+        label_2->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79);color: white;\n"
+"border-radius: 15px; "));
         browseBtn = new QPushButton(MailWindow);
         browseBtn->setObjectName(QString::fromUtf8("browseBtn"));
-        browseBtn->setGeometry(QRect(607, 135, 75, 31));
+        browseBtn->setGeometry(QRect(597, 139, 75, 31));
         browseBtn->setFont(font);
         browseBtn->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
         recipientLineEdit = new QLineEdit(MailWindow);
         recipientLineEdit->setObjectName(QString::fromUtf8("recipientLineEdit"));
-        recipientLineEdit->setGeometry(QRect(30, 66, 651, 31));
-        subjectLineEdit = new QLineEdit(MailWindow);
-        subjectLineEdit->setObjectName(QString::fromUtf8("subjectLineEdit"));
-        subjectLineEdit->setGeometry(QRect(30, 100, 651, 31));
-        label = new QLabel(MailWindow);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(30, 10, 91, 41));
-        QFont font1;
-        font1.setPointSize(16);
-        font1.setBold(true);
-        label->setFont(font1);
-        label->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79);color: white;\n"
-"border-radius: 15px; "));
+        recipientLineEdit->setGeometry(QRect(20, 70, 651, 31));
+        messageTextEdit = new QTextEdit(MailWindow);
+        messageTextEdit->setObjectName(QString::fromUtf8("messageTextEdit"));
+        messageTextEdit->setGeometry(QRect(20, 176, 651, 291));
+        attachmentLineEdit = new QLineEdit(MailWindow);
+        attachmentLineEdit->setObjectName(QString::fromUtf8("attachmentLineEdit"));
+        attachmentLineEdit->setGeometry(QRect(20, 140, 571, 31));
 
         retranslateUi(MailWindow);
 
@@ -77,13 +83,14 @@ public:
     void retranslateUi(QWidget *MailWindow)
     {
         MailWindow->setWindowTitle(QCoreApplication::translate("MailWindow", "Form", nullptr));
-        attachmentLineEdit->setPlaceholderText(QCoreApplication::translate("MailWindow", "attachement", nullptr));
+        label->setText(QString());
         sendMailButton->setText(QCoreApplication::translate("MailWindow", "Envoyer", nullptr));
-        messageTextEdit->setPlaceholderText(QCoreApplication::translate("MailWindow", "tapez votre message ...", nullptr));
+        subjectLineEdit->setPlaceholderText(QCoreApplication::translate("MailWindow", "Sujet", nullptr));
+        label_2->setText(QCoreApplication::translate("MailWindow", "Mail :", nullptr));
         browseBtn->setText(QCoreApplication::translate("MailWindow", "Browse ...", nullptr));
         recipientLineEdit->setPlaceholderText(QCoreApplication::translate("MailWindow", "Destinataire", nullptr));
-        subjectLineEdit->setPlaceholderText(QCoreApplication::translate("MailWindow", "Sujet", nullptr));
-        label->setText(QCoreApplication::translate("MailWindow", "Mail :", nullptr));
+        messageTextEdit->setPlaceholderText(QCoreApplication::translate("MailWindow", "tapez votre message ...", nullptr));
+        attachmentLineEdit->setPlaceholderText(QCoreApplication::translate("MailWindow", "attachement", nullptr));
     } // retranslateUi
 
 };

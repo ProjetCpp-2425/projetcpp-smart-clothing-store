@@ -2,19 +2,17 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "fournisseur.h"
-#include "./ui_mainwindow.h"
 
-namespace Ui {
-class MainWindow;
-}
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
@@ -23,10 +21,12 @@ private slots:
     void onDeleteFournisseurClicked();
     void onDisplayFournisseursClicked();
     void onExportPdfButtonClicked();
-    void onSearchButtonClicked();
+    void onSearchFournisseurClicked();
     void onSortButtonClicked();
     void onMailButtonClicked();
     void onChatBotButtonClicked();
+    void onProfileButtonClicked();
+    void onConvertButtonClicked();
 
 private:
     Ui::MainWindow *ui;

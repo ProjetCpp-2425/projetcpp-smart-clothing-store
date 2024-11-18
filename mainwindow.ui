@@ -232,8 +232,8 @@
    <widget class="QTableWidget" name="fournisseurTableWidget">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>140</y>
+      <x>480</x>
+      <y>150</y>
       <width>421</width>
       <height>361</height>
      </rect>
@@ -348,12 +348,12 @@ QTableWidget {
     </row>
     <column>
      <property name="text">
-      <string>Nom</string>
+      <string>ID</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>ID</string>
+      <string>Nom</string>
      </property>
     </column>
     <column>
@@ -371,7 +371,10 @@ QTableWidget {
       <string>Email</string>
      </property>
     </column>
-    <item row="0" column="0">
+    <item row="0" column="1">
+     <property name="text">
+      <string/>
+     </property>
      <property name="font">
       <font>
        <pointsize>8</pointsize>
@@ -668,7 +671,7 @@ QTableWidget {
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>510</y>
+      <y>520</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -837,14 +840,11 @@ QLineEdit {
 </string>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="1" colspan="2">
-      <widget class="QLineEdit" name="nameLineEdit"/>
+     <item row="1" column="2">
+      <widget class="QLineEdit" name="idLineEdit"/>
      </item>
-     <item row="4" column="2">
-      <widget class="QLineEdit" name="emailLineEdit"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_10">
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_11">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -855,7 +855,7 @@ QLineEdit {
         <string notr="true">color: black;</string>
        </property>
        <property name="text">
-        <string>ID</string>
+        <string>Date d'achat</string>
        </property>
       </widget>
      </item>
@@ -875,6 +875,31 @@ QLineEdit {
        </property>
       </widget>
      </item>
+     <item row="4" column="2">
+      <widget class="QLineEdit" name="emailLineEdit"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_13">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: black;</string>
+       </property>
+       <property name="text">
+        <string>Email</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" colspan="2">
+      <widget class="QLineEdit" name="nameLineEdit"/>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLineEdit" name="telephoneLineEdit"/>
+     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label_9">
        <property name="font">
@@ -893,44 +918,6 @@ QLineEdit {
      </item>
      <item row="2" column="2">
       <widget class="QDateEdit" name="achatDateEdit"/>
-     </item>
-     <item row="3" column="2">
-      <widget class="QLineEdit" name="telephoneLineEdit"/>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_13">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: black;</string>
-       </property>
-       <property name="text">
-        <string>Email</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_11">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: black;</string>
-       </property>
-       <property name="text">
-        <string>Date d'achat</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLineEdit" name="idLineEdit"/>
      </item>
     </layout>
    </widget>
@@ -961,7 +948,7 @@ color: white;</string>
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>510</y>
+      <y>520</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -1488,8 +1475,8 @@ border-radius: 15px; </string>
      <rect>
       <x>150</x>
       <y>70</y>
-      <width>83</width>
-      <height>29</height>
+      <width>101</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -1502,6 +1489,49 @@ border-radius: 15px; </string>
     </property>
     <property name="text">
      <string>Chat Bot</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="profileButton">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>520</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(13, 33, 79); color: white;</string>
+    </property>
+    <property name="text">
+     <string>Profile</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="convertButton">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>70</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(13, 33, 79); color: white;</string>
+    </property>
+    <property name="text">
+     <string>Convertir</string>
     </property>
    </widget>
   </widget>

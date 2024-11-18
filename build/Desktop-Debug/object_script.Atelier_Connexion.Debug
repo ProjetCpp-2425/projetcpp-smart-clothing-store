@@ -1,12 +1,13 @@
 debug/chatbotwindow.o
-debug/mailwindow.o
+debug/convertisseurwindow.o
+debug/fournisseurprofilewindow.o
 debug/mailwindow.o
 debug/main.o
-debug/mainwindow.o
-debug/mainwindow.o
 debug/mainwindow.o
 debug/connection.o
 debug/fournisseur.o
 debug/moc_chatbotwindow.o
+debug/moc_convertisseurwindow.o
+debug/moc_fournisseurprofilewindow.o
 debug/moc_mailwindow.o
 debug/moc_mainwindow.o
