@@ -13,6 +13,7 @@ public:
     bool updateFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate);
     bool deleteFournisseur(int id);
     QSqlQueryModel* getFournisseurs();
+    static QSqlQueryModel* filterByDate(const QDate& date);
 
 private:
     QString name;

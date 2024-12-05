@@ -70,3 +70,17 @@ QSqlQueryModel* Fournisseur::getFournisseurs() {
     model->setQuery(query);
     return model;
 }
+
+QSqlQueryModel* Fournisseur::filterByDate(const QDate& date) {
+    QSqlQueryModel* model = new QSqlQueryModel();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM fournisseurs WHERE achat_date = :date");
+    query.bindValue(":date", date.toString("yyyy-MM-dd"));
+
+    if (query.exec()) {
+        model->setQuery(query);
+    } else {
+        qDebug() << "Error filtering fournisseurs by date: " << query.lastError();
+    }
+    return model;
+}

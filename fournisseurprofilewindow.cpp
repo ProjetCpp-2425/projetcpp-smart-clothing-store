@@ -9,7 +9,6 @@ FournisseurProfileWindow::FournisseurProfileWindow(QWidget *parent)
     emailLabel(new QLabel(this)),
     achatDateLabel(new QLabel(this))
 {
-    // Layout configuration
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(nameLabel);
     layout->addWidget(telephoneLabel);

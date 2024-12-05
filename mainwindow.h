@@ -28,6 +28,8 @@ private slots:
     void onProfileButtonClicked();
     void onConvertButtonClicked();
 
+    void on_updateButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -23,7 +23,7 @@ void LoginWindow::onLoginClicked()
 
     if (username == "myuser" && password == "12345") {
         QMessageBox::information(this, "Login Successful", "Welcome!");
-        accept(); // Ferme LoginWindow et renvoie QDialog::Accepted
+        accept();
     } else {
         QMessageBox::warning(this, "Login Failed", "Invalid username or password. Please try again.");
     }
