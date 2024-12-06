@@ -32,6 +32,7 @@ private slots:
     void generateGenderStatistics();
 
 
+
 private:
     Ui::MainWindow *ui; // New HTML export function
 

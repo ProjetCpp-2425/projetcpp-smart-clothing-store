@@ -49,6 +49,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+
+
 }
 
 MainWindow::~MainWindow()
@@ -57,7 +59,7 @@ MainWindow::~MainWindow()
 }
 
 // Slot function for the "Ajouter" button
-void MainWindow::onAjouterClicked()
+/*void MainWindow::onAjouterClicked()
 {
     QString nom = ui->nomLineEdit->text();
     QString prenom = ui->prenomLineEdit->text();
@@ -84,7 +86,38 @@ void MainWindow::onAjouterClicked()
     } else {
         QMessageBox::critical(this, "Error", "ID already used. Please use a unique ID.");
     }
+}*/
+
+void MainWindow::onAjouterClicked()
+{
+    QString nom = ui->nomLineEdit->text();
+    QString prenom = ui->prenomLineEdit->text();
+    QString id = ui->idLineEdit->text();
+    QString dateNaissance = ui->dateNaissanceDateEdit->date().toString("yyyy-MM-dd");
+    QString genre = ui->genreLineEdit->text();
+    QString numeroTel = ui->numeroTelLineEdit->text();
+    QString adresse = ui->adresseLineEdit->text();
+    QString poste = ui->posteLineEdit->text();
+    QString salaire = ui->salaireLineEdit->text();
+    QString dateEmbauche = ui->dateEmbaucheDateEdit->date().toString("yyyy-MM-dd");
+
+    // Check if any field is empty
+    if (nom.isEmpty() || prenom.isEmpty() || id.isEmpty() || dateNaissance.isEmpty() ||
+        genre.isEmpty() || numeroTel.isEmpty() || adresse.isEmpty() || poste.isEmpty() ||
+        salaire.isEmpty() || dateEmbauche.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Please fill in all fields before adding.");
+        return;
+    }
+
+    // Create the employee object
+    Employe emp(nom, prenom, id, dateNaissance, genre, numeroTel, adresse, poste, salaire, dateEmbauche);
+
+    // Attempt to add the employee and handle the result
+    if (emp.ajouter()) {
+        QMessageBox::information(this, "Success", "Employee added successfully!");
+    }
 }
+
 
 void MainWindow::on_modifierbut_clicked()
 {
@@ -141,10 +174,17 @@ void MainWindow::on_supprimerClicked()
     }
 }
 
-void MainWindow::afficherEmployes() {
+/*void MainWindow::afficherEmployes() {
     Employe emp; // Create an instance of Employe
     ui->tableView->setModel(emp.afficher()); // Set the model to the tableView
+}*/
+
+void MainWindow::afficherEmployes() {
+    Employe emp; // Create an instance of Employe
+    QSqlQueryModel* model = emp.afficher(); // Get the formatted model from the 'afficher' function
+    ui->tableView->setModel(model); // Set the model to the tableView
 }
+
 
 void MainWindow::on_searchButton_clicked() {
     QString searchText = ui->searchLineEdit->text();  // Get the text from the QLineEdit
@@ -163,6 +203,7 @@ void MainWindow::on_searchButton_clicked() {
         QMessageBox::information(this, "Search Result", "No employee found with this ID or name.");
     }
 }
+
 
 void MainWindow::on_triButton_clicked() {
     // Get the selected column from the ComboBox (either 'SALAIRE' or 'DATEEMBAUCHE')

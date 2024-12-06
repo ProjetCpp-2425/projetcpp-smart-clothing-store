@@ -15,7 +15,7 @@ Employe::Employe() {}
 Employe::Employe(QString nom, QString prenom, QString id, QString dateNaissance, QString genre, QString numeroTel, QString adresse, QString poste, QString salaire, QString dateEmbauche)
     : nom(nom), prenom(prenom), id(id), dateNaissance(dateNaissance), genre(genre), numeroTel(numeroTel), adresse(adresse), poste(poste), salaire(salaire), dateEmbauche(dateEmbauche) {}
 
-bool Employe::ajouter()
+/*bool Employe::ajouter()
 {
     QSqlQuery query;
 
@@ -49,7 +49,55 @@ bool Employe::ajouter()
         qDebug() << "Failed to add employee:" << query.lastError();
         return false;
     }
+}*/
+
+bool Employe::ajouter()
+{
+    QSqlQuery query;
+
+    // Step 1: Check if ID already exists
+    query.prepare("SELECT id FROM employe WHERE id = :id");
+    query.bindValue(":id", id);
+    if (query.exec() && query.next()) { // ID already exists
+        QMessageBox::critical(nullptr, "Error", "ID already exists. Please use a unique ID.");
+        return false;
+    }
+
+    // Step 2: Validate the genre
+    if (genre != "F" && genre != "f" && genre != "M" && genre != "m") {
+        QMessageBox::critical(nullptr, "Error", "Invalid genre. Please use 'F' for female or 'M' for male.");
+        return false;
+    }
+
+    // Step 3: Validate the phone number
+    if (!numeroTel.contains(QRegularExpression("^[0-9]+$"))) {
+        QMessageBox::critical(nullptr, "Error", "Phone number must contain only digits.");
+        return false;
+    }
+
+    // Step 4: Insert employee into the database
+    query.prepare("INSERT INTO employe (nom, prenom, id, dateNaissance, genre, numeroTel, adresse, poste, salaire, dateEmbauche) "
+                  "VALUES (:nom, :prenom, :id, :dateNaissance, :genre, :numeroTel, :adresse, :poste, :salaire, :dateEmbauche)");
+
+    query.bindValue(":nom", nom);
+    query.bindValue(":prenom", prenom);
+    query.bindValue(":id", id);
+    query.bindValue(":dateNaissance", dateNaissance);
+    query.bindValue(":genre", genre);
+    query.bindValue(":numeroTel", numeroTel);
+    query.bindValue(":adresse", adresse);
+    query.bindValue(":poste", poste);
+    query.bindValue(":salaire", salaire);
+    query.bindValue(":dateEmbauche", dateEmbauche);
+
+    if (query.exec()) {
+        return true; // Return success, but don't show any message here
+    } else {
+        QMessageBox::critical(nullptr, "Error", "Failed to add employee: " + query.lastError().text());
+        return false;
+    }
 }
+
 
 bool Employe::modifier()
 {
@@ -113,7 +161,7 @@ bool Employe::supprimer(QString id)
     }
 }
 
-QSqlQueryModel* Employe::afficher() {
+/*QSqlQueryModel* Employe::afficher() {
     QSqlQueryModel* model = new QSqlQueryModel();
 
     model->setQuery("SELECT id, nom, prenom, dateNaissance, genre, numeroTel, adresse, poste, salaire, dateEmbauche FROM employe");
@@ -129,7 +177,41 @@ QSqlQueryModel* Employe::afficher() {
     model->setHeaderData(9, Qt::Horizontal, QObject::tr("Date d'Embauche"));
 
     return model; // Returns the model to be displayed in the UI
+}*/
+
+QSqlQueryModel* Employe::afficher() {
+    QSqlQueryModel* model = new QSqlQueryModel();
+
+    // Updated query to format ID, Date Naissance, and Date Embauche
+    model->setQuery("SELECT TO_CHAR(id) AS id, nom, prenom, "
+                    "TO_CHAR(dateNaissance, 'DD-MM-YYYY') AS dateNaissance, genre, "
+                    "numeroTel, adresse, poste, TO_NUMBER(salaire) AS salaire, "
+                    "TO_CHAR(dateEmbauche, 'DD-MM-YYYY') AS dateEmbauche "
+                    "FROM BOGH.EMPLOYE");
+
+
+    // Format the ID field
+    for (int row = 0; row < model->rowCount(); ++row) {
+        // Get the 'id' value, convert it to string and set it back
+        QString idString = QString::number(model->data(model->index(row, 0)).toInt());
+        model->setData(model->index(row, 0), idString); // Update the model with the formatted ID
+    }
+
+    // Set the headers for the columns
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prenom"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Date de Naissance"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Genre"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Numéro de Téléphone"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Adresse"));
+    model->setHeaderData(7, Qt::Horizontal, QObject::tr("Poste"));
+    model->setHeaderData(8, Qt::Horizontal, QObject::tr("Salaire"));
+    model->setHeaderData(9, Qt::Horizontal, QObject::tr("Date d'Embauche"));
+
+    return model; // Return the model to be displayed in the UI
 }
+
 
 QSqlQueryModel* Employe::chercher(QString searchText) {
     QSqlQueryModel *model = new QSqlQueryModel();
@@ -203,7 +285,7 @@ void Employe::sendSMSNotification(const QString &phoneNumber) {
     QNetworkRequest request;
     request.setUrl(QUrl("https://api.sendinblue.com/v3/transactionalSMS/sms"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader("api-key", "AddApiHere");
+    request.setRawHeader("api-key","to add later");
 
     QJsonObject smsData;
     smsData["sender"] = "Structura";
