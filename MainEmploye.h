@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MAINEMPLOYE_H
+#define MAINEMPLOYE_H
 
 #include <QMainWindow>
 #include <QSqlQuery> // For executing queries
@@ -9,16 +9,16 @@
 
 
 namespace Ui {
-class MainWindow;
+class MainEmploye;
 }
 
-class MainWindow : public QMainWindow
+class MainEmploye : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainEmploye(QWidget *parent = nullptr);
+    ~MainEmploye();
 
 private slots:
     void onAjouterClicked(); // Slot for the "Ajouter" button
@@ -34,8 +34,8 @@ private slots:
 
 
 private:
-    Ui::MainWindow *ui; // New HTML export function
+    Ui::MainEmploye *ui; // New HTML export function
 
 };
 
-#endif // MAINWINDOW_H
+#endif // MAINEMPLOYE_H

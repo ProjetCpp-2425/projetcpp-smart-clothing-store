@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "MainEmploye.h"
+#include "ui_MainEmploye.h"
 #include "employe.h" // Include the employee class header
 #include <QMessageBox> // For message dialogs
 #include <QDebug>
@@ -17,34 +17,34 @@
 #include <QInputDialog>
 
 
-MainWindow::MainWindow(QWidget *parent) :
+MainEmploye::MainEmploye(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainEmploye)
 {
     ui->setupUi(this);
 
     // Connect the "Ajouter" button to the onAjouterClicked() slot
-    connect(ui->ajouterButton, &QPushButton::clicked, this, &MainWindow::onAjouterClicked);
+    connect(ui->ajouterButton, &QPushButton::clicked, this, &MainEmploye::onAjouterClicked);
 
     // Connect the "Modifier" button to the on_modifierbut_clicked() slot
-    connect(ui->modifierButton, &QPushButton::clicked, this, &MainWindow::on_modifierbut_clicked);
+    connect(ui->modifierButton, &QPushButton::clicked, this, &MainEmploye::on_modifierbut_clicked);
 
     // Connect the "Supprimer" button to its slot
-    connect(ui->supprimerButton, &QPushButton::clicked, this, &MainWindow::on_supprimerClicked);
+    connect(ui->supprimerButton, &QPushButton::clicked, this, &MainEmploye::on_supprimerClicked);
 
     // Connect the "Afficherr" button to its slot
-    connect(ui->afficherButton, &QPushButton::clicked, this, &MainWindow::afficherEmployes);
+    connect(ui->afficherButton, &QPushButton::clicked, this, &MainEmploye::afficherEmployes);
 
-    connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::on_searchButton_clicked);
+    connect(ui->searchButton, &QPushButton::clicked, this, &MainEmploye::on_searchButton_clicked);
 
-    connect(ui->triButton, &QPushButton::clicked, this, &MainWindow::on_triButton_clicked);
+    connect(ui->triButton, &QPushButton::clicked, this, &MainEmploye::on_triButton_clicked);
 
     // Connect the comboBox for sorting columns
-    connect(ui->sortComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::on_sortComboBox_currentIndexChanged);
+    connect(ui->sortComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainEmploye::on_sortComboBox_currentIndexChanged);
 
-    connect(ui->exportPdfButton, &QPushButton::clicked, this, &MainWindow::exportToPDF);
+    connect(ui->exportPdfButton, &QPushButton::clicked, this, &MainEmploye::exportToPDF);
 
-    connect(ui->statGenderButton, &QPushButton::clicked, this, &MainWindow::generateGenderStatistics);
+    connect(ui->statGenderButton, &QPushButton::clicked, this, &MainEmploye::generateGenderStatistics);
 
 
 
@@ -53,13 +53,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
-MainWindow::~MainWindow()
+MainEmploye::~MainEmploye()
 {
     delete ui;
 }
 
 // Slot function for the "Ajouter" button
-/*void MainWindow::onAjouterClicked()
+/*void MainEmploye::onAjouterClicked()
 {
     QString nom = ui->nomLineEdit->text();
     QString prenom = ui->prenomLineEdit->text();
@@ -88,7 +88,7 @@ MainWindow::~MainWindow()
     }
 }*/
 
-void MainWindow::onAjouterClicked()
+void MainEmploye::onAjouterClicked()
 {
     QString nom = ui->nomLineEdit->text();
     QString prenom = ui->prenomLineEdit->text();
@@ -119,7 +119,7 @@ void MainWindow::onAjouterClicked()
 }
 
 
-void MainWindow::on_modifierbut_clicked()
+void MainEmploye::on_modifierbut_clicked()
 {
     QString id = ui->idLineEdit->text();
     QString nom = ui->nomLineEdit->text();
@@ -147,7 +147,7 @@ void MainWindow::on_modifierbut_clicked()
     }
 }
 
-void MainWindow::on_supprimerClicked()
+void MainEmploye::on_supprimerClicked()
 {
     // Get the ID from the input field
     QString id = ui->idLineEdit->text(); // Assuming ID is entered in a specific LineEdit field
@@ -174,19 +174,19 @@ void MainWindow::on_supprimerClicked()
     }
 }
 
-/*void MainWindow::afficherEmployes() {
+/*void MainEmploye::afficherEmployes() {
     Employe emp; // Create an instance of Employe
     ui->tableView->setModel(emp.afficher()); // Set the model to the tableView
 }*/
 
-void MainWindow::afficherEmployes() {
+void MainEmploye::afficherEmployes() {
     Employe emp; // Create an instance of Employe
     QSqlQueryModel* model = emp.afficher(); // Get the formatted model from the 'afficher' function
     ui->tableView->setModel(model); // Set the model to the tableView
 }
 
 
-void MainWindow::on_searchButton_clicked() {
+void MainEmploye::on_searchButton_clicked() {
     QString searchText = ui->searchLineEdit->text();  // Get the text from the QLineEdit
 
     if (searchText.isEmpty()) {
@@ -205,7 +205,7 @@ void MainWindow::on_searchButton_clicked() {
 }
 
 
-void MainWindow::on_triButton_clicked() {
+void MainEmploye::on_triButton_clicked() {
     // Get the selected column from the ComboBox (either 'SALAIRE' or 'DATEEMBAUCHE')
     QString sortColumn = ui->sortComboBox->currentText();
 
@@ -228,7 +228,7 @@ void MainWindow::on_triButton_clicked() {
 
 
 
-void MainWindow::on_sortComboBox_currentIndexChanged(int index)
+void MainEmploye::on_sortComboBox_currentIndexChanged(int index)
 {
       Q_UNUSED(index);
     // The logic for sorting goes here
@@ -252,7 +252,7 @@ void MainWindow::on_sortComboBox_currentIndexChanged(int index)
     }
 }
 
-void MainWindow::exportToPDF() {
+void MainEmploye::exportToPDF() {
     // Open a file dialog to select the output PDF file
     QString filePath = QFileDialog::getSaveFileName(this, "Exporter au format PDF", "", "*.pdf");
     if (filePath.isEmpty()) {
@@ -343,7 +343,7 @@ void MainWindow::exportToPDF() {
     }
 }
 
-void MainWindow::generateGenderStatistics() {
+void MainEmploye::generateGenderStatistics() {
     // Create a QMap to store the gender count
     QMap<QString, int> genderCount;
 
