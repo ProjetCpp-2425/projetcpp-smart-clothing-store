@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>382</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
      <x>0</x>
      <y>0</y>
      <width>401</width>
-     <height>301</height>
+     <height>381</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -36,7 +36,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>140</y>
+     <y>250</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -52,7 +52,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>100</y>
+     <y>210</y>
      <width>181</width>
      <height>31</height>
     </rect>
@@ -68,7 +68,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>180</y>
+     <y>290</y>
      <width>181</width>
      <height>31</height>
     </rect>
@@ -84,7 +84,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>140</y>
+     <y>250</y>
      <width>181</width>
      <height>31</height>
     </rect>
@@ -100,7 +100,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>230</y>
+     <y>340</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -139,7 +139,7 @@ border-radius: 15px; </string>
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>230</y>
+     <y>340</y>
      <width>181</width>
      <height>31</height>
     </rect>
@@ -155,7 +155,7 @@ border-radius: 15px; </string>
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>180</y>
+     <y>290</y>
      <width>63</width>
      <height>31</height>
     </rect>
@@ -171,7 +171,7 @@ border-radius: 15px; </string>
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>100</y>
+     <y>210</y>
      <width>63</width>
      <height>20</height>
     </rect>
@@ -181,6 +181,19 @@ border-radius: 15px; </string>
    </property>
    <property name="text">
     <string>Nom :</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="logoLabel">
+   <property name="geometry">
+    <rect>
+     <x>132</x>
+     <y>69</y>
+     <width>131</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

@@ -9,17 +9,18 @@
 class Fournisseur {
 public:
     Fournisseur();
-    bool addFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate);
-    bool updateFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate);
+    bool addFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate, const QString &logo, double prixAchat);
+    bool updateFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate, const QString &logo, double prixAchat);
     bool deleteFournisseur(int id);
     QSqlQueryModel* getFournisseurs();
-    static QSqlQueryModel* filterByDate(const QDate& date);
 
 private:
     QString name;
     QString telephone;
     QString email;
     QDate achatDate;
+    QString logo;
+    double prixAchat;
 };
 
 #endif // FOURNISSEUR_H

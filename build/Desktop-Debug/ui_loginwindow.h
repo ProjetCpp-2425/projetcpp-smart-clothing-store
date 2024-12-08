@@ -59,7 +59,6 @@ public:
         passwordLineEdit = new QLineEdit(LoginWindow);
         passwordLineEdit->setObjectName(QString::fromUtf8("passwordLineEdit"));
         passwordLineEdit->setGeometry(QRect(170, 140, 113, 28));
-        passwordLineEdit->setEchoMode(QLineEdit::Password);
         loginButton = new QPushButton(LoginWindow);
         loginButton->setObjectName(QString::fromUtf8("loginButton"));
         loginButton->setGeometry(QRect(140, 220, 101, 31));

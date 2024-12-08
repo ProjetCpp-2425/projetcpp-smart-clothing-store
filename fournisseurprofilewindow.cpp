@@ -1,25 +1,32 @@
 #include "FournisseurProfileWindow.h"
-#include <QVBoxLayout>
-#include <QLabel>
+#include "ui_FournisseurProfileWindow.h"
+#include <QPixmap>
+#include <QFileInfo>
 
-FournisseurProfileWindow::FournisseurProfileWindow(QWidget *parent)
-    : QWidget(parent),
-    nameLabel(new QLabel(this)),
-    telephoneLabel(new QLabel(this)),
-    emailLabel(new QLabel(this)),
-    achatDateLabel(new QLabel(this))
+FournisseurProfileWindow::FournisseurProfileWindow(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::FournisseurProfileWindow)
 {
-    QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addWidget(nameLabel);
-    layout->addWidget(telephoneLabel);
-    layout->addWidget(emailLabel);
-    layout->addWidget(achatDateLabel);
+    ui->setupUi(this);
 }
 
-void FournisseurProfileWindow::setFournisseurDetails(const QString& name, const QString& telephone, const QString& email, const QString& achatDate)
+FournisseurProfileWindow::~FournisseurProfileWindow()
 {
-    nameLabel->setText("Nom: " + name);
-    telephoneLabel->setText("Téléphone: " + telephone);
-    emailLabel->setText("Email: " + email);
-    achatDateLabel->setText("Date d'achat: " + achatDate);
+    delete ui;
+}
+
+void FournisseurProfileWindow::setFournisseurDetails(const QString &name, const QString &telephone, const QString &email, const QString &achatDate, const QString &logoPath)
+{
+    ui->nameLabel->setText(name);
+    ui->telephoneLabel->setText(telephone);
+    ui->emailLabel->setText(email);
+    ui->achatDateLabel->setText(achatDate);
+
+    // Load the logo
+    if (QFileInfo::exists(logoPath)) {
+        QPixmap pixmap(logoPath);
+        ui->logoLabel->setPixmap(pixmap.scaled(100, 100, Qt::KeepAspectRatio));
+    } else {
+        ui->logoLabel->setText("Logo not available");
+    }
 }

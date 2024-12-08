@@ -27,8 +27,8 @@ private slots:
     void onChatBotButtonClicked();
     void onProfileButtonClicked();
     void onConvertButtonClicked();
-
-    void on_updateButton_2_clicked();
+    void updateStats();
+    void browseLogo();
 
 private:
     Ui::MainWindow *ui;

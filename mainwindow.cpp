@@ -6,7 +6,6 @@
 #include <QPdfWriter>
 #include <QSqlQueryModel>
 #include <QFileDialog>
-#include <QImage>
 #include "ui_mainwindow.h"
 #include "fournisseur.h"
 #include "mailwindow.h"
@@ -34,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->mailButton, &QPushButton::clicked, this, &MainWindow::onMailButtonClicked);
     connect(ui->profileButton, &QPushButton::clicked, this, &MainWindow::onProfileButtonClicked);
     connect(ui->convertButton, &QPushButton::clicked, this, &MainWindow::onConvertButtonClicked);
+    connect(ui->browseButton, &QPushButton::clicked, this, &MainWindow::browseLogo);
+    connect(ui->refreshStatsButton, &QPushButton::clicked, this, &MainWindow::updateStats);
     onDisplayFournisseursClicked();
 }
 
@@ -50,12 +51,22 @@ void MainWindow::onAddFournisseurClicked()
     QString telephone = ui->telephoneLineEdit->text();
     QString email = ui->emailLineEdit->text();
     QDate achatDate = ui->achatDateEdit->date();
+    QString logo = ui->logoLineEdit->text();
+    double prixAchat = ui->prixAchatLineEdit->text().toDouble();
 
-    if (f.addFournisseur(id, name, telephone, email, achatDate)) {
+    if (f.addFournisseur(id, name, telephone, email, achatDate, logo, prixAchat)) {
         QMessageBox::information(this, "Success", "Fournisseur added successfully!");
         onDisplayFournisseursClicked();
     } else {
         QMessageBox::warning(this, "Error", "Failed to add fournisseur.");
+    }
+}
+
+void MainWindow::browseLogo() {
+    QString filePath = QFileDialog::getOpenFileName(this, "Select Logo", "", "Images (*.png *.jpg *.jpeg *.bmp *.gif);;All Files (*)");
+
+    if (!filePath.isEmpty()) {
+        ui->logoLineEdit->setText(filePath);
     }
 }
 
@@ -67,8 +78,10 @@ void MainWindow::onUpdateFournisseurClicked()
     QString telephone = ui->telephoneLineEdit->text();
     QString email = ui->emailLineEdit->text();
     QDate achatDate = ui->achatDateEdit->date();
+    QString logo = ui->logoLineEdit->text(); // Get logo path
+    double prixAchat = ui->prixAchatLineEdit->text().toDouble(); // Get purchase price
 
-    if (f.updateFournisseur(id, name, telephone, email, achatDate)) {
+    if (f.updateFournisseur(id, name, telephone, email, achatDate, logo, prixAchat)) {
         QMessageBox::information(this, "Success", "Fournisseur updated successfully!");
         onDisplayFournisseursClicked();
     } else {
@@ -94,14 +107,20 @@ void MainWindow::onDisplayFournisseursClicked()
     Fournisseur f;
 
     QSqlQueryModel *model = f.getFournisseurs();
-    if (model) {
+    if (model && model->rowCount() > 0) {
         ui->fournisseurTableWidget->clear();
         ui->fournisseurTableWidget->setRowCount(model->rowCount());
         ui->fournisseurTableWidget->setColumnCount(model->columnCount());
 
         for (int col = 0; col < model->columnCount(); ++col) {
-            ui->fournisseurTableWidget
-                ->setHorizontalHeaderItem(col, new QTableWidgetItem(model->headerData(col, Qt::Horizontal).toString()));
+            QString header = model->headerData(col, Qt::Horizontal).toString();
+
+            // If the column is for prix_achat, set custom header name
+            if (header == "Prix d'achat") {
+                header = "Purchase Price";
+            }
+
+            ui->fournisseurTableWidget->setHorizontalHeaderItem(col, new QTableWidgetItem(header));
         }
 
         for (int row = 0; row < model->rowCount(); ++row) {
@@ -111,13 +130,17 @@ void MainWindow::onDisplayFournisseursClicked()
             }
         }
     } else {
-        QMessageBox::warning(this, "Error", "Failed to display fournisseurs.");
+        QMessageBox::warning(this, "Error", "No fournisseurs found or failed to retrieve data.");
     }
 }
 
+
 void MainWindow::onExportPdfButtonClicked()
 {
-    QString filePath = QFileDialog::getSaveFileName(this, "Exporter en PDF", "", "PDF Files (*.pdf)");
+    QString filePath = QFileDialog::getSaveFileName(this,
+                                                    "Exporter en PDF",
+                                                    "",
+                                                    "PDF Files (*.pdf)");
     if (filePath.isEmpty()) {
         return;
     }
@@ -127,72 +150,41 @@ void MainWindow::onExportPdfButtonClicked()
     pdfWriter.setResolution(300);
     QPainter painter(&pdfWriter);
 
-    QColor backgroundColor(250, 250, 250);
-    painter.fillRect(0, 0, pdfWriter.width(), pdfWriter.height(), backgroundColor);
-
-    painter.setPen(Qt::black);
-    painter.setFont(QFont("Arial", 20, QFont::Bold));
-    painter.drawText(QRect(0, 20, pdfWriter.width(), 50), Qt::AlignCenter, "Master App - Structura");
-
-    QPixmap logo("C:/Users/user/Documents/InterfaceFournisseur/Structura.png");
-    QImage logoImage = logo.toImage();
-    int logoWidth = 300, logoHeight = 300;
-    painter.drawImage(50, 20, logoImage.scaled(logoWidth, logoHeight));
-
     painter.setFont(QFont("Arial", 16, QFont::Bold));
-    painter.drawText(QRect(0, 350, pdfWriter.width(), 30), Qt::AlignCenter, "Liste des Fournisseurs");
+    painter.drawText(100, 100, "Liste des Fournisseurs");
 
-    int x = 50, y = 400;
-    int columnWidth = 400, rowHeight = 80;
-
-    QColor headerColor(100, 150, 255);
-    QColor rowColor(255, 255, 255);
-    QColor rowAltColor(240, 240, 240);
-
-    if (y + rowHeight > pdfWriter.height()) {
-        pdfWriter.newPage();
-        y = 50;
-    }
-
-    painter.setBrush(headerColor);
-    painter.setPen(Qt::NoPen);
-    painter.drawRect(x, y, 5 * columnWidth, rowHeight);
-    painter.setPen(Qt::white);
-    painter.drawText(x + 10, y + 40, "ID");
-    painter.drawText(x + columnWidth + 10, y + 40, "Nom");
-    painter.drawText(x + 2 * columnWidth + 10, y + 40, "Date Achat");
-    painter.drawText(x + 3 * columnWidth + 10, y + 40, "Telephone");
-    painter.drawText(x + 4 * columnWidth + 10, y + 40, "Email");
-
-    y += rowHeight;
+    int x = 100;
+    int y = 200;
+    painter.setFont(QFont("Arial", 12));
+    painter.drawText(x, y, "ID");
+    painter.drawText(x + 100, y, "Nom");
+    painter.drawText(x + 300, y, "Téléphone");
+    painter.drawText(x + 500, y, "Email");
+    painter.drawText(x + 700, y, "Date Achat");
+    y += 50;
 
     Fournisseur F;
     QSqlQueryModel *model = F.getFournisseurs();
-
-    painter.setFont(QFont("Arial", 12));
     for (int row = 0; row < model->rowCount(); ++row) {
-        painter.setBrush((row % 2 == 0) ? rowColor : rowAltColor);
-        painter.setPen(Qt::NoPen);
-        painter.drawRect(x, y, 5 * columnWidth, rowHeight);
-
         QString id = model->data(model->index(row, 0)).toString();
         QString name = model->data(model->index(row, 1)).toString();
-        QString telephone = model->data(model->index(row, 3)).toString();
-        QString email = model->data(model->index(row, 4)).toString();
-        QString achatDate = model->data(model->index(row, 2)).toDate().toString("yyyy-MM-dd");
+        QString telephone = model->data(model->index(row, 2)).toString();
+        QString email = model->data(model->index(row, 3)).toString();
+        QString achatDate = model->data(model->index(row, 4)).toString();
 
-        painter.setPen(Qt::black);
-        painter.drawText(x + 10, y + 40, id);
-        painter.drawText(x + columnWidth + 10, y + 40, name);
-        painter.drawText(x + 2 * columnWidth + 10, y + 40, achatDate);
-        painter.drawText(x + 3 * columnWidth + 10, y + 40, telephone);
-        painter.drawText(x + 4 * columnWidth + 10, y + 40, email);
-
-        y += rowHeight;
+        painter.drawText(x, y, id);
+        painter.drawText(x + 100, y, name);
+        painter.drawText(x + 300, y, telephone);
+        painter.drawText(x + 500, y, email);
+        painter.drawText(x + 700, y, achatDate);
+        y += 30;
     }
 
     painter.end();
-    QMessageBox::information(this, "Exportation réussie", "Les données ont été exportées en PDF avec succès !");
+
+    QMessageBox::information(this,
+                             "Exportation réussie",
+                             "Les données ont été exportées en PDF avec succès !");
 }
 
 void MainWindow::onSearchFournisseurClicked() {
@@ -201,7 +193,6 @@ void MainWindow::onSearchFournisseurClicked() {
 
     if (searchQuery.isEmpty()) {
         QMessageBox::warning(this, "Recherche vide", "Veuillez entrer un critère de recherche.");
-        onDisplayFournisseursClicked();
         return;
     }
 
@@ -230,7 +221,6 @@ void MainWindow::onSearchFournisseurClicked() {
 
     if (row == 0) {
         QMessageBox::information(this, "Aucun résultat", "Aucun fournisseur trouvé pour le critère de recherche.");
-        onDisplayFournisseursClicked();
     }
 }
 
@@ -246,13 +236,8 @@ void MainWindow::onSortButtonClicked() {
         return;
     }
 
-    // Prepare the query safely
     QSqlQuery query;
-    if (sortCriteria == "name") {
-        query.prepare("SELECT * FROM fournisseurs ORDER BY name ASC");
-    } else if (sortCriteria == "id") {
-        query.prepare("SELECT * FROM fournisseurs ORDER BY id ASC");
-    }
+    query.prepare("SELECT * FROM fournisseurs ORDER BY " + sortCriteria);
 
     if (!query.exec()) {
         QMessageBox::warning(this, "Erreur de tri", "Le tri a échoué : " + query.lastError().text());
@@ -265,8 +250,8 @@ void MainWindow::onSortButtonClicked() {
     int row = 0;
     while (query.next()) {
         ui->fournisseurTableWidget->insertRow(row);
-        ui->fournisseurTableWidget->setItem(row, 0, new QTableWidgetItem(query.value("name").toString()));
-        ui->fournisseurTableWidget->setItem(row, 1, new QTableWidgetItem(query.value("id").toString()));
+        ui->fournisseurTableWidget->setItem(row, 0, new QTableWidgetItem(query.value("id").toString()));
+        ui->fournisseurTableWidget->setItem(row, 1, new QTableWidgetItem(query.value("name").toString()));
         ui->fournisseurTableWidget->setItem(row, 2, new QTableWidgetItem(query.value("telephone").toString()));
         ui->fournisseurTableWidget->setItem(row, 3, new QTableWidgetItem(query.value("email").toString()));
         ui->fournisseurTableWidget->setItem(row, 4, new QTableWidgetItem(query.value("achat_date").toString()));
@@ -274,8 +259,8 @@ void MainWindow::onSortButtonClicked() {
     }
 
     QMessageBox::information(this, "Tri effectué", "Les fournisseurs ont été triés par " + QString(sortCriteria == "name" ? "Nom" : "ID"));
-}
 
+}
 
 void MainWindow::onMailButtonClicked() {
     MailWindow *mailWindow = new MailWindow(this);
@@ -293,14 +278,14 @@ void MainWindow::onProfileButtonClicked()
 {
     QModelIndex selectedIndex = ui->fournisseurTableWidget->currentIndex();
     if (selectedIndex.isValid()) {
-
         QString name = ui->fournisseurTableWidget->item(selectedIndex.row(), 1)->text();
         QString telephone = ui->fournisseurTableWidget->item(selectedIndex.row(), 2)->text();
         QString email = ui->fournisseurTableWidget->item(selectedIndex.row(), 3)->text();
         QString achatDate = ui->fournisseurTableWidget->item(selectedIndex.row(), 4)->text();
+        QString logoPath = ui->fournisseurTableWidget->item(selectedIndex.row(), 5)->text();
 
-        FournisseurProfileWindow* profileWindow = new FournisseurProfileWindow();
-        profileWindow->setFournisseurDetails(name, telephone, email, achatDate);
+        FournisseurProfileWindow *profileWindow = new FournisseurProfileWindow(this);
+        profileWindow->setFournisseurDetails(name, telephone, email, achatDate, logoPath);
         profileWindow->setAttribute(Qt::WA_DeleteOnClose);
         profileWindow->show();
     } else {
@@ -308,37 +293,75 @@ void MainWindow::onProfileButtonClicked()
     }
 }
 
-void MainWindow::onConvertButtonClicked() {
-    ConvertisseurWindow *convertisseurWindow = new ConvertisseurWindow(this);
-    convertisseurWindow->setAttribute(Qt::WA_DeleteOnClose);
-    convertisseurWindow->show();
-}
-
-void MainWindow::on_updateButton_2_clicked()
+void MainWindow::updateStats()
 {
-    QDate filterDate = ui->dateFilterEdit->date();
+    double totalPrixAchat = 0;
+    double minPrixAchat = std::numeric_limits<double>::max();
+    double maxPrixAchat = std::numeric_limits<double>::lowest();
+    int count = 0;
 
-    QSqlQueryModel* model = Fournisseur::filterByDate(filterDate);
-    if (model) {
-        ui->fournisseurTableWidget->clear();
-        ui->fournisseurTableWidget->setRowCount(model->rowCount());
-        ui->fournisseurTableWidget->setColumnCount(model->columnCount());
+    // Iterate through all rows in the table to calculate stats
+    for (int row = 0; row < ui->fournisseurTableWidget->rowCount(); ++row) {
+        QTableWidgetItem *prixAchatItem = ui->fournisseurTableWidget->item(row, 5); // Assuming column 5 holds prix_achat
 
-        for (int col = 0; col < model->columnCount(); ++col) {
-            ui->fournisseurTableWidget
-                ->setHorizontalHeaderItem(col, new QTableWidgetItem(model->headerData(col, Qt::Horizontal).toString()));
-        }
-
-        for (int row = 0; row < model->rowCount(); ++row) {
-            for (int col = 0; col < model->columnCount(); ++col) {
-                QString cellData = model->data(model->index(row, col)).toString();
-                ui->fournisseurTableWidget->setItem(row, col, new QTableWidgetItem(cellData));
+        // Ensure the item is valid and numeric
+        if (prixAchatItem && !prixAchatItem->text().isEmpty()) {
+            bool ok;
+            double prixAchat = prixAchatItem->text().toDouble(&ok);
+            if (ok) {
+                totalPrixAchat += prixAchat;
+                minPrixAchat = std::min(minPrixAchat, prixAchat);
+                maxPrixAchat = std::max(maxPrixAchat, prixAchat);
+                count++;
             }
         }
-
-        QMessageBox::information(this, "Filter Applied", "Fournisseurs filtered by date: " + filterDate.toString("yyyy-MM-dd"));
-    } else {
-        QMessageBox::warning(this, "Filter Error", "No fournisseurs found for the selected date.");
     }
+
+    // Avoid division by zero in case there are no valid rows
+    if (count > 0) {
+        double averagePrixAchat = totalPrixAchat / count;
+
+        // Update the stats labels with the calculated values
+        ui->totalPrixAchatLabel->setText(QString::number(totalPrixAchat));
+        ui->averagePrixAchatLabel->setText(QString::number(averagePrixAchat));
+        ui->minPrixAchatLabel->setText(QString::number(minPrixAchat));
+        ui->maxPrixAchatLabel->setText(QString::number(maxPrixAchat));
+    } else {
+        // If no valid data is found
+        ui->totalPrixAchatLabel->setText("N/A");
+        ui->averagePrixAchatLabel->setText("N/A");
+        ui->minPrixAchatLabel->setText("N/A");
+        ui->maxPrixAchatLabel->setText("N/A");
+
+        QMessageBox::warning(this, "No Data", "No valid data found in 'prix_achat'.");
+    }
+}
+
+void MainWindow::onConvertButtonClicked()
+{
+    QModelIndex selectedIndex = ui->fournisseurTableWidget->currentIndex();
+    if (!selectedIndex.isValid()) {
+        QMessageBox::warning(this, "Erreur", "Veuillez sélectionner un fournisseur.");
+        return;
+    }
+
+    // Assuming 'prix_achat' is in column 6 (index 5 in 0-based index)
+    QTableWidgetItem* prixItem = ui->fournisseurTableWidget->item(selectedIndex.row(), 5);
+    if (!prixItem) {
+        QMessageBox::warning(this, "Erreur", "Prix d'achat non trouvé.");
+        return;
+    }
+
+    bool ok;
+    double prixAchat = prixItem->text().toDouble(&ok);
+    if (!ok) {
+        QMessageBox::warning(this, "Erreur", "Prix d'achat invalide.");
+        return;
+    }
+
+    // Pass the prixAchat to ConvertisseurWindow
+    ConvertisseurWindow* convertisseurWindow = new ConvertisseurWindow(prixAchat, this);
+    convertisseurWindow->setAttribute(Qt::WA_DeleteOnClose);
+    convertisseurWindow->show();
 }
 

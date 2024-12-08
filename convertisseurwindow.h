@@ -12,7 +12,7 @@ class ConvertisseurWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit ConvertisseurWindow(QWidget *parent = nullptr);
+    explicit ConvertisseurWindow(double prixAchat, QWidget *parent = nullptr);
     ~ConvertisseurWindow();
 
 private slots:
@@ -20,6 +20,7 @@ private slots:
 
 private:
     Ui::ConvertisseurWindow *ui;
+    double prixAchat;
 };
 
 #endif // CONVERTISSEURWINDOW_H

@@ -10,7 +10,6 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDateEdit>
 #include <QtWidgets/QFrame>
@@ -19,7 +18,6 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
@@ -63,17 +61,14 @@ public:
     QPushButton *chatBotButton;
     QPushButton *profileButton;
     QPushButton *convertButton;
-    QPushButton *updateButton_2;
-    QDateEdit *dateFilterEdit;
     QMenuBar *menubar;
-    QMenu *menugestion;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1164, 618);
+        MainWindow->resize(942, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         sortByNameRadioButton = new QRadioButton(centralwidget);
@@ -193,7 +188,7 @@ public:
         fournisseurTableWidget->setGridStyle(Qt::SolidLine);
         label_8 = new QLabel(centralwidget);
         label_8->setObjectName(QString::fromUtf8("label_8"));
-        label_8->setGeometry(QRect(990, 10, 151, 141));
+        label_8->setGeometry(QRect(780, 0, 151, 141));
         label_8->setPixmap(QPixmap(QString::fromUtf8("Structura.png")));
         label_8->setScaledContents(true);
         exportPdfButton = new QPushButton(centralwidget);
@@ -474,26 +469,14 @@ public:
         convertButton->setGeometry(QRect(280, 70, 101, 31));
         convertButton->setFont(font6);
         convertButton->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
-        updateButton_2 = new QPushButton(centralwidget);
-        updateButton_2->setObjectName(QString::fromUtf8("updateButton_2"));
-        updateButton_2->setGeometry(QRect(920, 180, 91, 31));
-        updateButton_2->setFont(font3);
-        updateButton_2->setStyleSheet(QString::fromUtf8("background-color: rgb(13, 33, 79); color: white;"));
-        dateFilterEdit = new QDateEdit(centralwidget);
-        dateFilterEdit->setObjectName(QString::fromUtf8("dateFilterEdit"));
-        dateFilterEdit->setGeometry(QRect(930, 228, 221, 181));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1164, 25));
-        menugestion = new QMenu(menubar);
-        menugestion->setObjectName(QString::fromUtf8("menugestion"));
+        menubar->setGeometry(QRect(0, 0, 942, 25));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
-
-        menubar->addAction(menugestion->menuAction());
 
         retranslateUi(MainWindow);
 
@@ -539,8 +522,6 @@ public:
         chatBotButton->setText(QCoreApplication::translate("MainWindow", "Chat Bot", nullptr));
         profileButton->setText(QCoreApplication::translate("MainWindow", "Profile", nullptr));
         convertButton->setText(QCoreApplication::translate("MainWindow", "Convertir", nullptr));
-        updateButton_2->setText(QCoreApplication::translate("MainWindow", "STAT", nullptr));
-        menugestion->setTitle(QCoreApplication::translate("MainWindow", "gestion", nullptr));
     } // retranslateUi
 
 };

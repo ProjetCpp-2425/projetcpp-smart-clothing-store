@@ -6,14 +6,16 @@
 
 Fournisseur::Fournisseur() {}
 
-bool Fournisseur::addFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate) {
+bool Fournisseur::addFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate, const QString &logo, double prixAchat) {
     QSqlQuery query;
-    query.prepare("INSERT INTO fournisseurs (id, name, telephone, email, achat_date) VALUES (?, ?, ?, ?, ?)");
+    query.prepare("INSERT INTO fournisseurs (id, name, telephone, email, achat_date, logo, prix_achat) VALUES (?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(id);
     query.addBindValue(name);
     query.addBindValue(telephone);
     query.addBindValue(email);
     query.addBindValue(achatDate);
+    query.addBindValue(logo);
+    query.addBindValue(prixAchat);
 
     if (!query.exec()) {
         qDebug() << "Error adding fournisseur:" << query.lastError().text();
@@ -23,18 +25,22 @@ bool Fournisseur::addFournisseur(int id, const QString &name, const QString &tel
         qDebug() << "Telephone:" << telephone;
         qDebug() << "Email:" << email;
         qDebug() << "Achat Date:" << achatDate.toString("yyyy-MM-dd");
+        qDebug() << "Logo:" << logo;
+        qDebug() << "Prix Achat:" << prixAchat;
         return false;
     }
     return true;
 }
 
-bool Fournisseur::updateFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate) {
+bool Fournisseur::updateFournisseur(int id, const QString &name, const QString &telephone, const QString &email, const QDate &achatDate, const QString &logo, double prixAchat) {
     QSqlQuery query;
-    query.prepare("UPDATE fournisseurs SET name = ?, telephone = ?, email = ?, achat_date = ? WHERE id = ?");
+    query.prepare("UPDATE fournisseurs SET name = ?, telephone = ?, email = ?, achat_date = ?, logo = ?, prix_achat = ? WHERE id = ?");
     query.addBindValue(name);
     query.addBindValue(telephone);
     query.addBindValue(email);
     query.addBindValue(achatDate);
+    query.addBindValue(logo);
+    query.addBindValue(prixAchat);
     query.addBindValue(id);
 
     if (!query.exec()) {
@@ -59,7 +65,7 @@ bool Fournisseur::deleteFournisseur(int id) {
 QSqlQueryModel* Fournisseur::getFournisseurs() {
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query;
-    query.prepare("SELECT * FROM fournisseurs");
+    query.prepare("SELECT id, name, telephone, email, achat_date, prix_achat FROM fournisseurs");
 
     if (!query.exec()) {
         qDebug() << "Error retrieving fournisseurs:" << query.lastError().text();
@@ -71,16 +77,3 @@ QSqlQueryModel* Fournisseur::getFournisseurs() {
     return model;
 }
 
-QSqlQueryModel* Fournisseur::filterByDate(const QDate& date) {
-    QSqlQueryModel* model = new QSqlQueryModel();
-    QSqlQuery query;
-    query.prepare("SELECT * FROM fournisseurs WHERE achat_date = :date");
-    query.bindValue(":date", date.toString("yyyy-MM-dd"));
-
-    if (query.exec()) {
-        model->setQuery(query);
-    } else {
-        qDebug() << "Error filtering fournisseurs by date: " << query.lastError();
-    }
-    return model;
-}
