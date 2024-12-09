@@ -1,3 +1,4 @@
+/*
 #include "arduino.h"
 #include <QSerialPort>
 #include <QSerialPortInfo>
@@ -83,3 +84,4 @@ int arduino::write_to_arduino( QByteArray d)
 
     return 0;
 }
+*/
